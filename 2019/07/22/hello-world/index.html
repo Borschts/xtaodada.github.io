@@ -152,24 +152,20 @@ cover: https://i.loli.net/2019/07/21/5d33d5dc1531213134.png
 
   </article>
   <section class="nexmoe-comment">
-    <script id="dsq-count-scr" src="https://xtao.disqus.com/count.js" async></script>
-<div id="disqus_thread"></div>
-<script>
-    var disqus_config = function () {
-        this.page.url = 'https://xtaodada.github.io/xtao.github.io/2019/07/22/hello-world/'; // Replace PAGE_URL with your page's canonical URL variable
-        this.page.identifier = 'https://xtaodada.github.io/xtao.github.io/2019/07/22/hello-world/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-    };
+    <link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/gitalk/1.5.0/gitalk.min.css">
+<div id="gitalk"></div>
+<script src="https://cdnjs.loli.net/ajax/libs/gitalk/1.5.0/gitalk.min.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: 'f1c72bb69eb7cce2d217',
+        clientSecret: '63bac7936484fba9afd2d91c262b10f80e62ba8d',
+        id: window.location.pathname,
+        repo: 'xtaodada.github.io',
+        owner: 'xtaodada',
+        admin: 'xtaodada'
+    })
+    gitalk.render('gitalk')
 </script>
-<script id="disqus-thread-script">
-    (function() { // DON'T EDIT BELOW THIS LINE
-        var d = document;
-        var s = d.createElement('script');
-        s.src = '//xtao.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', + new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-
 </section>
 </div>
         <div class="nexmoe-copyright">
