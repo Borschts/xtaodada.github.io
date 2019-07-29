@@ -37,18 +37,23 @@ body {
   font-size: 0 0;
 }
 #nexmoe-header .nexmoe-avatar {
-  padding: 55px;
+  margin: 45px;
   z-index: 4;
   position: relative;
   font-size: 0;
-}
-#nexmoe-header .nexmoe-avatar img {
+  width: calc(100% - 90px);
+  overflow: hidden;
   border-radius: 100%;
   box-shadow: 0 0.3rem 2rem rgba(161,177,204,0.6);
 }
+#nexmoe-header .nexmoe-avatar a {
+  padding-bottom: 100%;
+  display: block;
+  height: 0;
+}
 #nexmoe-header .nexmoe-count {
-  padding: 30px;
-  padding-top: 0;
+  padding: 0 30px;
+  margin-bottom: 30px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -63,6 +68,19 @@ body {
 #nexmoe-header .nexmoe-count div span {
   color: #363636;
   display: block;
+}
+#nexmoe-header .nexmoe-social {
+  padding: 5px;
+}
+#nexmoe-header .nexmoe-social a {
+  width: 36px;
+  height: 36px;
+  line-height: 36px;
+  margin: 5px;
+  border-radius: 100%;
+  display: inline-block;
+  text-align: center;
+  color: #606266;
 }
 #nexmoe-header .nexmoe-list {
   padding: 8px 20px;
@@ -284,6 +302,8 @@ body {
   border-radius: 10px;
   margin-bottom: 10px;
   max-height: 500px;
+  min-height: 65px;
+  background-color: #eee;
 }
 #nexmoe-content .nexmoe-post .nexmoe-post-cover img {
   width: 100%;
@@ -364,6 +384,11 @@ body {
 #nexmoe-content .nexmoe-post article {
   padding: 10px 0;
   margin-bottom: 30px;
+}
+#nexmoe-content .nexmoe-comment {
+  background-color: #f5f6f5;
+  padding: 20px;
+  margin: -20px;
 }
 @media screen and (max-width: 1023px) {
   .nexmoe-tab a {
