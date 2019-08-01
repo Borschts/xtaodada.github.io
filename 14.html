@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+
+<head><meta name="generator" content="Hexo 3.9.0">
+  
+  <title>【主机搭梯教程】ss-panel一键安装脚本 - 深海小涛</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NGJNBSS');</script>
+<!-- End Google Tag Manager -->
+
+  
+
+  <link rel="shortcut icon" href="/favicon.ico" type="image/png">
+  <meta name="description" content="上周接触了ss-panel，发现搭建起来异常的麻烦，对新手来说，到处都是坑，因此写了本ss-panel一键安装脚本 。 Github：https://github.com/mmmwhy/ss-panel-and-ss-py-mu">
+<meta name="keywords" content="梯子,BBR,CentOS,crontab,LNMP,php,shadowsocks-manyuser,ss-node,ss-panel,一键,主机,脚本">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【主机搭梯教程】ss-panel一键安装脚本">
+<meta property="og:url" content="https://xtaolink.cn/14.html">
+<meta property="og:site_name" content="深海小涛">
+<meta property="og:description" content="上周接触了ss-panel，发现搭建起来异常的麻烦，对新手来说，到处都是坑，因此写了本ss-panel一键安装脚本 。 Github：https://github.com/mmmwhy/ss-panel-and-ss-py-mu">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-08-01T10:36:34.584Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【主机搭梯教程】ss-panel一键安装脚本">
+<meta name="twitter:description" content="上周接触了ss-panel，发现搭建起来异常的麻烦，对新手来说，到处都是坑，因此写了本ss-panel一键安装脚本 。 Github：https://github.com/mmmwhy/ss-panel-and-ss-py-mu">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdui@0.4.3/dist/css/mdui.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.15.8/styles/atom-one-dark.css">
+   
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+  
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1038733_0xvrvpg9c0r.css">
+  <link rel="stylesheet" href="/css/style.css?v=1564664743710">
+</head>
+
+<body class="mdui-drawer-body-left">
+  
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NGJNBSS" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+  <div class="nexmoe-bg" style="background-image: url(https://i.loli.net/2019/07/27/5d3bdb4c6651c56099.jpg)"></div>
+  <div id="nexmoe-header">
+      <div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="/">
+            <img src="/images/avatar.jpg">
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div><span>文章</span>30</div>
+        <div><span>标签</span>129</div>
+        <div><span>分类</span>4</div>
+    </div>
+    <ul class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/">
+            <i class="mdui-list-item-icon nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                回到首页
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/about.html">
+            <i class="mdui-list-item-icon nexmoefont icon-info-circle"></i>
+            <div class="mdui-list-item-content">
+                我的故事
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/PY.html">
+            <i class="mdui-list-item-icon nexmoefont icon-unorderedlist"></i>
+            <div class="mdui-list-item-content">
+                隔壁基佬
+            </div>
+        </a>
+        
+    </ul>
+    <aside id="nexmoe-sidebar">
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">社交按钮</h3>
+    <div class="nexmoe-widget nexmoe-social">
+        
+        <a class="mdui-ripple" href="https://space.bilibili.com/35363258" target="_blank" mdui-tooltip="{content: 'Bilibili'}" style="color: rgb(231, 106, 141);background-color: rgba(231, 106, 141, .15);">
+            <i class="nexmoefont icon-bilibili"></i>
+        </a>
+        
+        <a class="mdui-ripple" href="https://github.com/xtaodada/" target="_blank" mdui-tooltip="{content: 'GitHub'}" style="color: rgb(25, 23, 23);background-color: rgba(25, 23, 23, .15);">
+            <i class="nexmoefont icon-github"></i>
+        </a>
+        
+        <a class="mdui-ripple" href="https://t.me/mrwangzhe" target="_blank" mdui-tooltip="{content: 'Telegram'}" style="color: rgb(39, 167, 229);background-color: rgba(39, 167, 229, .1);">
+            <i class="nexmoefont icon-telegram"></i>
+        </a>
+        
+        <a class="mdui-ripple" href="https://twitter.com/xtaodada" target="_blank" mdui-tooltip="{content: 'Twitter'}" style="color: rgb(29, 161, 242);background-color: rgba(29, 161, 242, .1);">
+            <i class="nexmoefont icon-twitter"></i>
+        </a>
+        
+    </div>
+</div>
+  
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章分类</h3>
+    <div class="nexmoe-widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/">技术</a><span class="category-list-count">18</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/日常/">日常</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/日常/">日常</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/未分类/">未分类</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">标签云</h3>
+    <div class="nexmoe-widget tagcloud">
+      <a href="/tags/00后/" style="font-size: 10px;">00后</a> <a href="/tags/2018/" style="font-size: 20px;">2018</a> <a href="/tags/2019/" style="font-size: 10px;">2019</a> <a href="/tags/7月/" style="font-size: 12px;">7月</a> <a href="/tags/API/" style="font-size: 10px;">API</a> <a href="/tags/APNG/" style="font-size: 10px;">APNG</a> <a href="/tags/AstrillVPN/" style="font-size: 10px;">AstrillVPN</a> <a href="/tags/BBR/" style="font-size: 12px;">BBR</a> <a href="/tags/Bilibili/" style="font-size: 18px;">Bilibili</a> <a href="/tags/B站/" style="font-size: 10px;">B站</a> <a href="/tags/CentOS/" style="font-size: 14px;">CentOS</a> <a href="/tags/FireFox/" style="font-size: 10px;">FireFox</a> <a href="/tags/GIF/" style="font-size: 10px;">GIF</a> <a href="/tags/Google搜索/" style="font-size: 10px;">Google搜索</a> <a href="/tags/IE/" style="font-size: 10px;">IE</a> <a href="/tags/IPV4/" style="font-size: 10px;">IPV4</a> <a href="/tags/IPV6/" style="font-size: 10px;">IPV6</a> <a href="/tags/LNMP/" style="font-size: 12px;">LNMP</a> <a href="/tags/Mozilla/" style="font-size: 10px;">Mozilla</a> <a href="/tags/OpenVZ/" style="font-size: 10px;">OpenVZ</a> <a href="/tags/PNG/" style="font-size: 10px;">PNG</a> <a href="/tags/SS/" style="font-size: 12px;">SS</a> <a href="/tags/SSR/" style="font-size: 12px;">SSR</a> <a href="/tags/SSR面板/" style="font-size: 10px;">SSR面板</a> <a href="/tags/Skype/" style="font-size: 10px;">Skype</a> <a href="/tags/Telegram/" style="font-size: 10px;">Telegram</a> <a href="/tags/U盘/" style="font-size: 10px;">U盘</a> <a href="/tags/VPN/" style="font-size: 10px;">VPN</a> <a href="/tags/chx818/" style="font-size: 10px;">chx818</a> <a href="/tags/crontab/" style="font-size: 10px;">crontab</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/debian/" style="font-size: 10px;">debian</a> <a href="/tags/free/" style="font-size: 10px;">free</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a> <a href="/tags/iPhone/" style="font-size: 10px;">iPhone</a> <a href="/tags/kevin/" style="font-size: 10px;">kevin</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/moe/" style="font-size: 10px;">moe</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/newyear/" style="font-size: 10px;">newyear</a> <a href="/tags/nex/" style="font-size: 10px;">nex</a> <a href="/tags/nordvpn/" style="font-size: 10px;">nordvpn</a> <a href="/tags/php/" style="font-size: 14px;">php</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/qq/" style="font-size: 10px;">qq</a> <a href="/tags/redpack/" style="font-size: 10px;">redpack</a> <a href="/tags/shadowsocks-manyuser/" style="font-size: 10px;">shadowsocks-manyuser</a> <a href="/tags/ss-node/" style="font-size: 10px;">ss-node</a> <a href="/tags/ss-panel/" style="font-size: 16px;">ss-panel</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/style/" style="font-size: 10px;">style</a> <a href="/tags/tg/" style="font-size: 10px;">tg</a> <a href="/tags/ubuntu/" style="font-size: 12px;">ubuntu</a> <a href="/tags/vivo/" style="font-size: 10px;">vivo</a> <a href="/tags/vpn/" style="font-size: 10px;">vpn</a> <a href="/tags/vps/" style="font-size: 20px;">vps</a> <a href="/tags/vultr/" style="font-size: 10px;">vultr</a> <a href="/tags/webP/" style="font-size: 10px;">webP</a> <a href="/tags/wordpress/" style="font-size: 10px;">wordpress</a> <a href="/tags/wp/" style="font-size: 10px;">wp</a> <a href="/tags/一键/" style="font-size: 12px;">一键</a> <a href="/tags/中国/" style="font-size: 10px;">中国</a> <a href="/tags/中学生/" style="font-size: 10px;">中学生</a> <a href="/tags/主机/" style="font-size: 14px;">主机</a> <a href="/tags/主机搭梯/" style="font-size: 10px;">主机搭梯</a> <a href="/tags/主题/" style="font-size: 12px;">主题</a> <a href="/tags/介绍/" style="font-size: 10px;">介绍</a> <a href="/tags/修改/" style="font-size: 10px;">修改</a> <a href="/tags/免费/" style="font-size: 10px;">免费</a> <a href="/tags/公告/" style="font-size: 12px;">公告</a> <a href="/tags/冻果果/" style="font-size: 10px;">冻果果</a> <a href="/tags/刀剑神域/" style="font-size: 10px;">刀剑神域</a> <a href="/tags/刘海屏/" style="font-size: 10px;">刘海屏</a> <a href="/tags/前后端/" style="font-size: 10px;">前后端</a> <a href="/tags/动图/" style="font-size: 10px;">动图</a> <a href="/tags/动漫/" style="font-size: 12px;">动漫</a> <a href="/tags/大会员/" style="font-size: 10px;">大会员</a> <a href="/tags/宕机/" style="font-size: 10px;">宕机</a> <a href="/tags/宣传/" style="font-size: 10px;">宣传</a> <a href="/tags/小鸡/" style="font-size: 10px;">小鸡</a> <a href="/tags/常识/" style="font-size: 10px;">常识</a> <a href="/tags/广告/" style="font-size: 10px;">广告</a> <a href="/tags/建站/" style="font-size: 10px;">建站</a> <a href="/tags/微信/" style="font-size: 10px;">微信</a> <a href="/tags/我的英雄学院/" style="font-size: 10px;">我的英雄学院</a> <a href="/tags/手动/" style="font-size: 10px;">手动</a> <a href="/tags/手机/" style="font-size: 10px;">手机</a> <a href="/tags/技术/" style="font-size: 10px;">技术</a> <a href="/tags/抓取/" style="font-size: 10px;">抓取</a> <a href="/tags/拼多多/" style="font-size: 10px;">拼多多</a> <a href="/tags/接口/" style="font-size: 10px;">接口</a> <a href="/tags/搜索/" style="font-size: 10px;">搜索</a> <a href="/tags/搭建/" style="font-size: 12px;">搭建</a> <a href="/tags/摄像头/" style="font-size: 10px;">摄像头</a> <a href="/tags/支付宝/" style="font-size: 10px;">支付宝</a> <a href="/tags/攻击/" style="font-size: 10px;">攻击</a> <a href="/tags/教程/" style="font-size: 10px;">教程</a> <a href="/tags/数据/" style="font-size: 10px;">数据</a> <a href="/tags/新番/" style="font-size: 12px;">新番</a> <a href="/tags/新闻/" style="font-size: 10px;">新闻</a> <a href="/tags/服务器/" style="font-size: 10px;">服务器</a> <a href="/tags/梯子/" style="font-size: 18px;">梯子</a> <a href="/tags/测评/" style="font-size: 12px;">测评</a> <a href="/tags/浏览器/" style="font-size: 10px;">浏览器</a> <a href="/tags/爱奇艺/" style="font-size: 10px;">爱奇艺</a> <a href="/tags/番剧/" style="font-size: 14px;">番剧</a> <a href="/tags/百度/" style="font-size: 10px;">百度</a> <a href="/tags/社会/" style="font-size: 10px;">社会</a> <a href="/tags/科技/" style="font-size: 10px;">科技</a> <a href="/tags/红包/" style="font-size: 10px;">红包</a> <a href="/tags/红芯/" style="font-size: 10px;">红芯</a> <a href="/tags/结构/" style="font-size: 10px;">结构</a> <a href="/tags/维护/" style="font-size: 10px;">维护</a> <a href="/tags/网易/" style="font-size: 10px;">网易</a> <a href="/tags/网站/" style="font-size: 10px;">网站</a> <a href="/tags/网络/" style="font-size: 12px;">网络</a> <a href="/tags/脚本/" style="font-size: 12px;">脚本</a> <a href="/tags/苹果/" style="font-size: 10px;">苹果</a> <a href="/tags/试水/" style="font-size: 10px;">试水</a> <a href="/tags/语音/" style="font-size: 10px;">语音</a> <a href="/tags/赞赏/" style="font-size: 10px;">赞赏</a> <a href="/tags/通知/" style="font-size: 10px;">通知</a> <a href="/tags/配置/" style="font-size: 10px;">配置</a> <a href="/tags/酸酸乳/" style="font-size: 10px;">酸酸乳</a> <a href="/tags/隐私/" style="font-size: 10px;">隐私</a> <a href="/tags/青岛/" style="font-size: 10px;">青岛</a> <a href="/tags/音乐/" style="font-size: 10px;">音乐</a> <a href="/tags/风险/" style="font-size: 10px;">风险</a>
+    </div>
+  </div>
+
+  
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章归档</h3>
+    <div class="nexmoe-widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">二月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">十二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">六月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+</aside>
+    <div class="nexmoe-copyright">
+        &copy; 2019 Xtao_dada
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        & <a href="https://nexmoe.com/hexo-theme-nexmoe.html" target="_blank">Nexmoe</a>
+    </div>
+</div><!-- .nexmoe-drawer -->
+
+<script>
+    const getRealPath = (pathname, desc = false) => {
+        if (!pathname) {
+            pathname = window.location.pathname
+        }
+        let names = pathname.split("/")
+        if (desc === false) {
+            for (let i = names.length - 1; i >= 0; --i) {
+                let name = names[i].trim()
+                if (name.length > 0 && name !== "/" && name !== "index.html") {
+                    return name
+                }
+            }
+        } else {
+            for (let i = 0; i < names.length; ++i) {
+                let name = names[i].trim()
+                if (name.length > 0 && name !== "/" && name !== "index.html") {
+                    return name
+                }
+            }
+        }
+        return "/"
+    }
+    let links = document.querySelectorAll('.nexmoe-list-item');
+    let rootRealPath = getRealPath(window.location.pathname, true);
+    for (let link of links) {
+        let linkPath = link.getAttribute("href");
+        if (linkPath && getRealPath(linkPath, true) === rootRealPath) {
+            link.className = "active nexmoe-list-item mdui-list-item mdui-ripple";
+        }
+    }
+</script>
+  </div>
+  <div id="nexmoe-content">
+    <div class="nexmoe-primary">
+        <div class="nexmoe-tab">
+            <a mdui-drawer="{target: '#drawer', swipe: true}">
+              <i class="mdui-icon material-icons">menu</i>
+            </a>
+          </div>
+        <div class="nexmoe-post">
+    <div class="nexmoe-post-cover"> 
+        
+            <img src="https://i.loli.net/2019/07/27/5d3bdb4c6651c56099.jpg">
+        
+        <h1>【主机搭梯教程】ss-panel一键安装脚本</h1>
+    </div>
+  <div class="nexmoe-post-meta">
+    <a><i class="nexmoefont icon-calendar-fill"></i>2018年02月16日</a>
+    <a><i class="nexmoefont icon-areachart"></i>950 字</a>
+    <a><i class="nexmoefont icon-time-circle-fill"></i>大概 4 分钟</a>
+    
+      <a class="nexmoefont icon-appstore-fill -link" href="/categories/技术/">技术</a>
+    
+    
+      <a class="nexmoefont icon-tag-fill -link" href="/tags/BBR/">BBR</a> <a class="nexmoefont icon-tag-fill -link" href="/tags/CentOS/">CentOS</a> <a class="nexmoefont icon-tag-fill -link" href="/tags/LNMP/">LNMP</a> <a class="nexmoefont icon-tag-fill -link" href="/tags/crontab/">crontab</a> <a class="nexmoefont icon-tag-fill -link" href="/tags/php/">php</a> <a class="nexmoefont icon-tag-fill -link" href="/tags/shadowsocks-manyuser/">shadowsocks-manyuser</a> <a class="nexmoefont icon-tag-fill -link" href="/tags/ss-node/">ss-node</a> <a class="nexmoefont icon-tag-fill -link" href="/tags/ss-panel/">ss-panel</a> <a class="nexmoefont icon-tag-fill -link" href="/tags/一键/">一键</a> <a class="nexmoefont icon-tag-fill -link" href="/tags/主机/">主机</a> <a class="nexmoefont icon-tag-fill -link" href="/tags/梯子/">梯子</a> <a class="nexmoefont icon-tag-fill -link" href="/tags/脚本/">脚本</a>
+    
+  </div>
+  <article>
+    <p>上周接触了ss-panel，发现搭建起来异常的麻烦，对新手来说，到处都是坑，因此写了本ss-panel一键安装脚本 。 Github：<a href="https://xtaolink.cn/404/go.php?url=https://github.com/mmmwhy/ss-panel-and-ss-py-mu" target="_blank" rel="noopener">https://github.com/mmmwhy/ss-panel-and-ss-py-mu</a></p>
+<a id="more"></a>
+
+<h1 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h1><h1 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h1><ul>
+<li>前端使用最新<a href="https://xtaolink.cn/404/go.php?url=https://github.com/orvice/ss-panel" target="_blank" rel="noopener">ss-panel v3</a>，稳定性和可管理行都有明显提高。</li>
+<li>后端使用<a href="https://xtaolink.cn/404/go.php?url=https://github.com/fsgmhoward/shadowsocks-py-mu" target="_blank" rel="noopener">shadowsocks-py-mu</a>，多用户版本，与前端完美对接。</li>
+<li>推荐与<a href="https://xtaolink.cn/22.html" target="_blank" rel="noopener">BBR一键脚本</a>，搭配使用。如果是ovz,建议先本脚本再bbr，如果是其他，建议先bbr再本脚本</li>
+<li>过程全自动，所以可能碰到的坑都提前做好处理。</li>
+<li>被墙掉的资源都换成了墙内资源，不会出现被卡死的情况了。</li>
+</ul>
+<h1 id="系统要求"><a href="#系统要求" class="headerlink" title="系统要求"></a>系统要求</h1><p>建议CentOS7 X64，我用的是这个版本，目前在腾讯云，digitalocean，interserver上通过测试。 理论上：CentOS 6+ / Debian 7+ / Ubuntu 14.04 + 都可以</p>
+<h1 id="一键安装脚本"><a href="#一键安装脚本" class="headerlink" title="一键安装脚本"></a>一键安装脚本</h1><h1 id="登陆后运行："><a href="#登陆后运行：" class="headerlink" title="登陆后运行："></a>登陆后运行：</h1><pre><code>screen -S ss</code></pre><p>如果提示screen: command not found 命令不存在可以执行：</p>
+<pre><code>yum install screen
+
+screen -r ss
+
+wget -N --no-check-certificate https://raw.githubusercontent.com/mmmwhy/ss-panel-and-ss-py-mu/master/ss-panel_node.sh &amp;&amp; chmod +x ss-panel_node.sh &amp;&amp; bash ss-panel_node.sh</code></pre><p>运行脚本后会出现脚本操作菜单</p>
+<h2 id="ss-panel和ss-node同时安装"><a href="#ss-panel和ss-node同时安装" class="headerlink" title="ss-panel和ss-node同时安装"></a>ss-panel和ss-node同时安装</h2><p>选择并输入 1<br>因为ss-panel依赖于mysql,php,nginx，使用lnmp一键安装包，点击任意键开始安装。<br>LNMP包编译时间较长，可以喝杯茶吃个饭。大约30分钟左右，安装结束，提示登陆IP即可查看网站 <strong>默认账户：<a href="mailto:ss@feiyang.li" target="_blank" rel="noopener">ss@feiyang.li</a></strong> <strong>默认密码：feiyang</strong> 进入ss-panel页面后，记得在<strong>管理面板-&gt;节点管理-&gt;添加节点-&gt;输入节点信息</strong> 之后回到用户面板，就可以使用了。</p>
+<h2 id="仅安装ss-panel"><a href="#仅安装ss-panel" class="headerlink" title="仅安装ss-panel"></a>仅安装ss-panel</h2><p>选择并输入 2 出现的结果与1相同，只不过您vps上没有同时安装<a href="https://xtaolink.cn/404/go.php?url=https://github.com/fsgmhoward/shadowsocks-py-mu" target="_blank" rel="noopener">ss-py-mu</a></p>
+<h2 id="仅安装ss-node"><a href="#仅安装ss-node" class="headerlink" title="仅安装ss-node"></a>仅安装ss-node</h2><ul>
+<li>先在网页增加节点信息，特别要记住这里的node_id</li>
+<li>选择并输入 3，用于新建节点。</li>
+<li>输入相关信息，ip地址和域名（ss-panel的）都可以，但是需要加上<strong>http:// 或者 https://</strong> ，注意区分自己域名有没有ssl。否则可能出现用户使用记录无法推送的问题。</li>
+<li>如果使用本一键脚本搭建前端页面，第二个mukey可以直接按回车，默认是<strong>mupass</strong></li>
+<li>第三个位置输入之前那个node_id。</li>
+<li>如果最后提示cat log失败，其实是不影响的，因为有没有记录是不影响的。</li>
+</ul>
+<h2 id="查看-shadowsocks-manyuser-是否已经运行："><a href="#查看-shadowsocks-manyuser-是否已经运行：" class="headerlink" title="查看 shadowsocks-manyuser 是否已经运行："></a>查看 shadowsocks-manyuser 是否已经运行：</h2><pre><code>ps -ef | grep servers.py
+root 952 739 0 15:40 ? 00:00:00 python /root/shadowsocks-rm/shadowsocks/servers.p</code></pre><p>出现底下那一行，就代表运行成功了。</p>
+<h1 id="其他补充内容"><a href="#其他补充内容" class="headerlink" title="其他补充内容"></a>其他补充内容</h1><ul>
+<li><ul>
+<li>LNMP环境编译时间较长</li>
+<li>php依赖安装会花费较长时间，特别是在国内</li>
+</ul>
+</li>
+</ul>
+<pre><code>*   mailgun账号需要自己申请，我那个只是举个例子。
+*   基于[lnmp1.3稳定版](https://xtaolink.cn/404/go.php?url=https://lnmp.org/)制作，兼容性非常好。
+*   关于[Google的bbr加速](https://xtaolink.cn/404/go.php?url=https://v2no.com/2017/06/02/bbr/)，与本脚本可以通用，但是因为效果不明显(可能因为我们实验室网太烂了吧)，所以我没有加入。
+*   有人问到，vps重启后，节点就不能连接了。有两个方法：
+    *   使用crontab
+    *   开机之后，输入`supervisord`，打开守护进程就好了。
+*   不停的有人问“node不能添加”“启动不起来”“怎么添加域名”“怎么修改签到流量”“怎么修改初始流量”…….如果真的有什么问题，建议先看上边页面，其实写的很清楚了。
+*   脚本只是提供一个很基本的尝鲜体验，如果要长期使用，请手动搭建。</code></pre>
+  </article>
+  <section class="nexmoe-comment">
+    <!-- Unpkg -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/disqusjs@1.2.5/dist/disqusjs.min.css">
+<script src="https://cdn.jsdelivr.net/npm/disqusjs@1.2.5/dist/disqus.min.js"></script>
+<div id="disqus_thread"></div>
+<script>
+var dsqjs = new DisqusJS({
+    shortname: 'xtao',
+    siteName: '深海小涛',
+    identifier: 'https://xtaolink.cn/14.html',
+    url: 'https://xtaolink.cn/14.html',
+    title: '【主机搭梯教程】ss-panel一键安装脚本',
+    api: 'https://disqus.skk.moe/disqus/',
+    apikey: '6rpBHFIvZF7UcrhPQd0xnhfOTZu9yA0ZFSTXN70Eug3bz2RUXxGc9JBFLmcvqB2W',
+    admin: 'mrwangzhe',
+    adminLabel: '快来评论吧 ~~~'
+});
+</script>
+</section>
+</div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/mdui@0.4.3/dist/js/mdui.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+ 
+    <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+
+ 
+    <script src="https://cdn.jsdelivr.net/npm/smoothscroll-for-websites@1.4.9/SmoothScroll.min.js"></script>
+
+
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script src="/js/app.js?v=1564664743584"></script>
+<script src="https://cdn.jsdelivr.net/npm/lazysizes@5.1.0/lazysizes.min.js"></script>
+
+  
+
+
+
+
+
+</body>
+
+</html>

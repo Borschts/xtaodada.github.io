@@ -1,0 +1,22 @@
+# hexo robots.txt
+User-agent 
+Allow 
+Allow archives
+
+Disallow vendors
+Disallow js
+Disallow css
+Disallow fonts
+Disallow vendors
+Disallow fancybox
+Disallow 404
+Disallow f
+Disallow git
+Disallow gl
+Disallow wordpress
+Disallow wp-admin
+Disallow wp-content
+Disallow wp-includes
+
+Sitemap https://xtaolink.cn/sitemap.xml
+Sitemap https://xtaolink.cn/baidusitemap.xml
