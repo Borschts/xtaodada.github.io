@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://xtaolink.cn/PY.html</loc>
+    
+    <lastmod>2019-08-11T07:23:45.179Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://xtaolink.cn/340.html</loc>
     
     <lastmod>2019-08-10T07:26:55.268Z</lastmod>
@@ -12,13 +19,6 @@
     <loc>https://xtaolink.cn/339.html</loc>
     
     <lastmod>2019-08-10T06:52:59.251Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://xtaolink.cn/PY.html</loc>
-    
-    <lastmod>2019-08-09T08:21:47.026Z</lastmod>
     
   </url>
   
@@ -268,14 +268,14 @@
   </url>
   
   <url>
-    <loc>https://xtaolink.cn/scaffolds/draft.html</loc>
+    <loc>https://xtaolink.cn/scaffolds/page.html</loc>
     
     <lastmod>2019-07-22T09:19:39.231Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://xtaolink.cn/scaffolds/page.html</loc>
+    <loc>https://xtaolink.cn/scaffolds/draft.html</loc>
     
     <lastmod>2019-07-22T09:19:39.231Z</lastmod>
     
